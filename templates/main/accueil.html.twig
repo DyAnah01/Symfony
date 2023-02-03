@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ parent()}}|Accueil
+{% endblock title %}
+
+{% block h1 %}
+    Bienvenue
+{% endblock h1 %}
+
+{% block body %}
+    <img src="{{ asset('images/abc.jpg') }}" alt="image de fond" style="width: 80vw; margin: 0 auto">
+{% endblock body %}

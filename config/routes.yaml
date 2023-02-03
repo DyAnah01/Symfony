@@ -5,3 +5,7 @@ controllers:
 main: 
     path: /main
     controller: App\Controller\MainController::index
+
+accueil:
+    path: /
+    controller: App\Controller\MainController::accueil

@@ -15,4 +15,14 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
         ]);
     }
+
+    #[Route('/', name: 'accueil')]
+    public function accueil()
+    {
+
+        // $message = "Bienvenue";
+        // dump($message); comme var_dump, pour tester
+        // dd($message); raccourcis 
+        return $this->render("main/accueil.html.twig");
+    }
 }
