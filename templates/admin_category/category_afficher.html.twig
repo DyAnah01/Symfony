@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ parent() }}|Gestion des catégories
+{% endblock title %}
+
+{% block h1 %}
+    Gestion des catégories
+{% endblock h1 %}
+
+{% block body %}
+
+<div class="row justify-content-end m-2">
+    <a class="btn btn-success p-2 col-md-3" href="">Ajouter une catégorie</a>
+</div>
+{% if categories %}
+
+
+{% endif %}
+    
+{% endblock body %}
