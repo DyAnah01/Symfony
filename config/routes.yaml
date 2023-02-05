@@ -9,3 +9,7 @@ main:
 accueil:
     path: /
     controller: App\Controller\MainController::accueil
+
+afficher:
+    path: /gestion_category/afficher
+    controller: App\Controller\AdminCategoryController::category_afficher
