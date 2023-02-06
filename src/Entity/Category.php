@@ -33,6 +33,4 @@ class Category
 
         return $this;
     }
-
-    
 }

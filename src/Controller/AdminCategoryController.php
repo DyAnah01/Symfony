@@ -4,12 +4,16 @@ namespace App\Controller;
 
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Category;
+use App\Form\CategoryType;
+use Doctrine\ORM\EntityManagerInterface;
 
 class AdminCategoryController extends AbstractController
 {
-    #[Route('/admin/category', name: 'app_admin_category')]
+    #[Route('/admin/category', name:'app_admin_category')]
     public function index(): Response
     {
         return $this->render('admin_category/index.html.twig', [
@@ -18,7 +22,7 @@ class AdminCategoryController extends AbstractController
     }
 
 
-    #[Route("/gestion/afficher", name: "category_afficher")]
+    #[Route("/gestion/afficher", name:"category_afficher")]
     public function category_afficher(CategoryRepository $repoCategory)
     {
         $categories = $repoCategory->findAll();//SELECT * FROM category
@@ -26,4 +30,67 @@ class AdminCategoryController extends AbstractController
             "categories" => $categories
         ]);
     }
+
+    #[Route("/gestion/ajouter", name: "category_ajouter")]
+    public function category_ajouter(Request $request, EntityManagerInterface $manager)
+    {
+
+        // pour ajouter une entity, on a besoin de créer un nouvel objet issu de la class/entity Category
+        $category = new Category;
+        dump($category);
+        /*
+        pour créer un formulaire, on utilise la methode createForm()
+        2 arguments obliogatoires :
+        1-> class du formulaire
+        2-> objet issu de la class/entity
+        3-> facultatif : tableau
+        */
+        $form = $this->createForm(CategoryType::class, $category);
+        // $form est un objet (qui contient ses methodes)
+
+        $form->handleRequest($request);
+        /*
+        Pour traiter le formulaire on utilise la méthode handleRequest() dans lequel on injecte l’objet $request
+        */
+
+        /*
+        Traitement du formulaire
+        HandleRequest() premet de gérer le traitement de la saisie du formulaire.
+        Lorsqu'on soumet le formulaire (bouton submit) $_POST est transmis à la même URL grâce à la request , on peut traiter le contenu de la requête
+        */
+
+        // si le formulaire a été soumis (clic sur le bouton de type="submit")
+        // et si le formulaire a été validé (respect des conditions/contraintes)
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            /*
+            Si le formulaire a été soumis (l’utilisateur a cliqué sur le bouton submit) et si le formulaire est valide
+            (placer des conditions/contraintes sur le formulaire, input non vide, entre xx et xx caractères etc...)
+            */
+            dump($category);
+            $manager->persist($category); //définir l'objet à envoyer
+            $manager->flush(); //envoyer
+            dd($category);
+            /*
+            On utilise 2 méthodes de la class EntityManagerInterface:
+
+            Persist() permet d’insérer ou de modifier
+            C’est la propriété id qui permet de définir
+
+            Flush() permet d’envoyer en base de données
+            */
+
+        }
+
+
+        return $this->render('admin_category/Category_ajouter.html.twig',[
+            "formCategory" => $form->createView(),
+            // dans l'objet form se trouve une methode createView permettant de créer la structure en html du formulaire
+        ]);
+
+
+    }
+
+
 }

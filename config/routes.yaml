@@ -13,3 +13,7 @@ accueil:
 category_afficher:
     path: /gestion/afficher
     controller: App\Controller\AdminCategoryController::category_afficher
+
+category_ajouter:
+    path: /gestion/ajouter
+    controller: App\Controller\AdminCategoryController::category_ajouter
