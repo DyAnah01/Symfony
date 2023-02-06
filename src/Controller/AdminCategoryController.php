@@ -18,8 +18,8 @@ class AdminCategoryController extends AbstractController
     }
 
 
-    #[Route("/gestion_category/afficher", name: "category_afficher")]
-    public function afficher_category(CategoryRepository $repoCategory)
+    #[Route("/gestion/afficher", name: "category_afficher")]
+    public function category_afficher(CategoryRepository $repoCategory)
     {
         $categories = $repoCategory->findAll();//SELECT * FROM category
         return $this->render("admin_category/category_afficher.html.twig",[

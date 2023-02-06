@@ -10,6 +10,6 @@ accueil:
     path: /
     controller: App\Controller\MainController::accueil
 
-afficher:
-    path: /gestion_category/afficher
+category_afficher:
+    path: /gestion/afficher
     controller: App\Controller\AdminCategoryController::category_afficher
