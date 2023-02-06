@@ -17,3 +17,7 @@ category_afficher:
 category_ajouter:
     path: /gestion/ajouter
     controller: App\Controller\AdminCategoryController::category_ajouter
+
+category_modifier:
+    path: /gestion/modifier/{id}
+    controller: App\Controller\AdminCategoryController::category_modifier

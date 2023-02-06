@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ parent() }} | Modifier {{category.nom}}
+{% endblock title %}
+
+{% block h1 %}
+    Modifier {{ category.nom }}
+{% endblock h1 %}
+
+{% block body %}
+    
+    {{ form_start(formCategory) }}
+
+    <div class="col-md-10 mx-auto">
+        {{ form_row(formCategory.nom) }}
+    </div>
+    
+    <div class="row justify-content-center">
+        <input type="submit" class="btn btn-success mt-3 col-md-6" value="Ajouter">
+    </div>
+
+
+    {{ form_end(formCategory) }}
+
+
+{% endblock body %}

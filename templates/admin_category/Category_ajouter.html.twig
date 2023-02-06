@@ -9,11 +9,17 @@
 {% endblock h1 %}
 
 {% block body %}
-    
+{# {{ dump(app.flashes('success')) }} #}
+{% for notification in app.flashes('success') %}
+<div class="alert alert-success col-md-6 mx-auto text-center disparition">
+    {{ notification }}
+</div>
+{% endfor %}
     {{ form_start(formCategory) }}
     <div class="col-md-10 mx-auto">
         {{ form_row(formCategory.nom) }}
     </div>
+    
     <div class="row justify-content-center">
         <input type="submit" class="btn btn-success mt-3 col-md-6" value="Ajouter">
     </div>
