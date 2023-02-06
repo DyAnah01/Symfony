@@ -39,7 +39,7 @@ class AdminCategoryController extends AbstractController
 
         // pour ajouter une entity, on a besoin de créer un nouvel objet issu de la class/entity Category
         $category = new Category;
-        dump($category);
+        // dump($category);
         /*
         pour créer un formulaire, on utilise la methode createForm()
         2 arguments obliogatoires :
@@ -63,7 +63,7 @@ class AdminCategoryController extends AbstractController
 
         // si le formulaire a été soumis (clic sur le bouton de type="submit")
         // et si le formulaire a été validé (respect des conditions/contraintes)
-
+        $idCategory = $category->getId();
         if($form->isSubmitted() && $form->isValid())
         {
             /*
@@ -83,7 +83,7 @@ class AdminCategoryController extends AbstractController
 
             Flush() permet d’envoyer en base de données
             */
-            $this->addFlash('succes', "La catégorie N°". $category->getId()."a bien été ajoutée");
+            $this->addFlash('succes', "La catégorie N°$idCategory a bien été ajoutée");
             
             return $this->redirectToRoute("category_afficher");
 
@@ -104,6 +104,7 @@ class AdminCategoryController extends AbstractController
         // dd($id);
         $category = $repoCategory->find($id);
         // dd($category);
+        $idCategory = $category->getId();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
@@ -113,7 +114,7 @@ class AdminCategoryController extends AbstractController
             $manager->persist($category);
             $manager->flush();
 
-            $this->addFlash("succes", "La catégorie N°" . $category->getId() . "a bien été modifié");
+            $this->addFlash("succes", "La catégorie N°$idCategory a bien été modifié");
             return $this->redirectToRoute('category_afficher');
 
         }
@@ -123,6 +124,21 @@ class AdminCategoryController extends AbstractController
             "formCategory" => $form->createView(),
             "category"=> $category
         ]);
+
+    }
+
+
+    #[Route('/gestion/supprimer/{id}', name: "category_supprimer")]
+    public function category_supprimer(Category $category, EntityManagerInterface $manager)
+    {
+        $idCategory = $category->getId();
+
+        $manager->remove($category);
+        $manager->flush();
+
+    $this->addFlash("success", "La catégorie N° $idCategory a bien été supprimée");
+
+    return $this->redirectToRoute('category_afficher');
 
     }
 

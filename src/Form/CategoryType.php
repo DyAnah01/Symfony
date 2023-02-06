@@ -8,6 +8,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+
 
 class CategoryType extends AbstractType
 {
@@ -20,6 +23,18 @@ class CategoryType extends AbstractType
                 "attr"=>[
                     "placeholder"=> "Saisir le nom de la catégorie",
                     "class"=>"border border-primary"
+                ],
+                "constraints"=>[
+                    new NotBlank([
+                        "message" => "Veuillez saisir un nom de catégorie"
+
+                    ]),
+                    new Length([
+                        "min" => 5,
+                        "max"=>10,
+                        "minMessage" => "5 caractères min 🥲",
+                        "maxMessage" => "10 caractères max 😅"
+                    ])
                 ]
             ])
             // ->add('Ajouter', SubmitType::class)
