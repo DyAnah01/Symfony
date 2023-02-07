@@ -17,7 +17,7 @@
 {% endfor %}
 
 <div class="row justify-content-end m-2">
-    <a class="btn btn-success p-2 col-md-3" href="{{ path('category_ajouter') }}">Ajouter une catégorie</a>
+    <a class="btn btn-success p-2 col-md-3 my-5" href="{{ path('category_ajouter') }}">Ajouter une catégorie</a>
 </div>
 
 {% if categories %} 
@@ -31,7 +31,7 @@
         <th scope="col">Supprimer</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="bg-white">
         {% for value in categories %}
             <tr>
                 <th scope="row">{{ value.id }}</th>
